@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="./styles.css">
-
+    <title>Hihi</title>
 </head>
 
 <body>
@@ -17,19 +17,33 @@
         </div>
         <div class="buttons">
             <button class="btn" id="yesButton" onclick="nextPage()">Đồng ý</button>
-            <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">Từ chối</button>
+            <button class="btn" id="noButton" onmouseover="moveButton()" onclick="increaseSize()">Từ chối</button>
             <script>
                 function nextPage() {
                     window.location.href = "yes.html";
                 }
 
+                let count = 0;
                 function moveButton() {
                     var x = Math.random() * (window.innerWidth - document.getElementById('noButton').offsetWidth) - 85;
                     var y = Math.random() * (window.innerHeight - document.getElementById('noButton').offsetHeight) - 48;
                     document.getElementById('noButton').style.left = `${x}px`;
                     document.getElementById('noButton').style.top = `${y}px`;
+
                 }
 
+                function increaseSize() {
+                    if (count < 3) {
+                        var yesButton = document.getElementById('yesButton');
+                        var currentFontSize = parseFloat(window.getComputedStyle(yesButton, null).getPropertyValue('font-size'));
+                        yesButton.style.fontSize = (currentFontSize * 2) + 'px';
+                        if (count == 2) {
+                            document.getElementById('noButton').style.display = 'none';
+                            yesButton.style.margin = 0;
+                        }
+                    }
+                    count++;
+                }
             </script>
         </div>
     </div>
