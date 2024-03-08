@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Button Size Example</title>
+    <style>
+        /* CSS for the buttons */
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+            /* Darker Green */
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="yesButton" class="button" onclick="increaseSize('yesButton')">Yes</button>
+    <button id="noButton" class="button" onclick="increaseSize('yesButton')">No</button>
+
+    <script>
+        let count = 0;
+        function increaseSize(buttonId) {
+            var button = document.getElementById(buttonId);
+            var currentFontSize = parseFloat(window.getComputedStyle(button, null).getPropertyValue('font-size'));
+            var maxFontSize = window.innerWidth * 0.4; // Set the maximum font size based on the viewport width
+            if (count < 2) {
+                button.style.fontSize = (currentFontSize * 5) + 'px'; // Increase font size by 2px
+                count++;
+                console.log('count: ', count)
+            }
+            else {
+                button.style.fontSize = maxFontSize + 'px'; // Increase font size by 2px
+                button.style.width = '100%'
+                document.getElementById('noButton').style.display = 'none';
+            }
+        }
+
+        window.addEventListener('beforeunload', function (e) {
+            e.preventDefault();
+            e.returnValue = '';
+        });
+    </script>
+
+</body>
+
+</html>
